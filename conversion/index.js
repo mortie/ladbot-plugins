@@ -48,7 +48,7 @@ module.exports =
 					amount = parseFloat(token);
 			});
 
-			var host = "http://www.free.currencyconverterapi.com";
+			var host = "http://free.currencyconverterapi.com";
 			var path = "/api/convert?q="+fromCurrency+"-"+toCurrency+"&compact=y";
 
 			api.request(host+path, function(err, res, body)
