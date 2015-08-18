@@ -1,4 +1,4 @@
-var Cleverbot = require("./libs/cleverbot-node");
+var Cleverbot = require("./libs/cleverbot.io");
 
 var bot = new Cleverbot;
 

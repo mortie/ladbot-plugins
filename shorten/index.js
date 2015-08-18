@@ -16,7 +16,20 @@ module.exports =
 			{
 				if (err) throw err;
 
-				api.say(body.split(/\n/)[0]);
+				var shortened = body.split(/\n/)[0];
+
+				api.request(url.split("#")[0], function(err, res, body) {
+					if (err) throw err;
+
+					var title;
+					var match = body.match(/<\s*title\s*>([^>]+)<\s*\/\s*title\s*>/mi);
+					if (!match)
+						title = "No Title";
+					else
+						title = match[1] || "No Title";
+
+					api.say(shortened+" ("+title+")");
+				});
 			});
 		}
 	}
