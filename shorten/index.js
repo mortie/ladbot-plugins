@@ -12,11 +12,12 @@ module.exports =
 			if (url.length < 25)
 				return;
 
-			api.request("http://xeo.la/url/?url="+url.split("#")[0], function(err, res, body)
+			api.request("http://url.xeo.la/api/?url="+url.split("#")[0], function(err, res, body)
 			{
 				if (err) throw err;
 
-				var shortened = body.split(/\n/)[0];
+				var obj = JSON.parse(body);
+				var shortened = "http://xeo.la/"+obj.code;
 
 				api.request(url.split("#")[0], function(err, res, body) {
 					if (err) throw err;
@@ -26,7 +27,11 @@ module.exports =
 					if (!match)
 						title = "No Title";
 					else
-						title = match[1] || "No Title";
+						title = (match[1] || "No Title").trim()
+							.replace(/\s+/g, " ")
+							.replace("&quot;", "'")
+							.replace("&gt;", ">")
+							.replace("&lt;", "<");
 
 					api.say(shortened+" ("+title+")");
 				});
