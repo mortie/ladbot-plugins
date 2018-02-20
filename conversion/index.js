@@ -54,7 +54,6 @@ module.exports =
 			api.request(host+path, function(err, res, body)
 			{
 				if (err) throw err;
-				console.log(body);
 
 				var result = amount*JSON.parse(body)[fromCurrency+"_"+toCurrency].val;
 				api.randomMessage("currencyConvert",
