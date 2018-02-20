@@ -49,13 +49,14 @@ module.exports =
 			});
 
 			var host = "http://free.currencyconverterapi.com";
-			var path = "/api/convert?q="+fromCurrency+"-"+toCurrency+"&compact=y";
+			var path = "/api/v5/convert?q="+fromCurrency+"_"+toCurrency+"&compact=y";
 
 			api.request(host+path, function(err, res, body)
 			{
 				if (err) throw err;
+				console.log(body);
 
-				var result = amount*JSON.parse(body)[fromCurrency+"-"+toCurrency].val;
+				var result = amount*JSON.parse(body)[fromCurrency+"_"+toCurrency].val;
 				api.randomMessage("currencyConvert",
 				{
 					"from": fromCurrency,
